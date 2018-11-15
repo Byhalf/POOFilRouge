@@ -16,12 +16,12 @@ public class Human implements GamePlayer{
     Scanner scanner = new Scanner(System.in);
 
     String possibleMoves="Coup valide: ";
-    for(Integer moves: game.validMoves()){
+    for(Integer moves: game.getValidMoves()){
       possibleMoves += Integer.toString(moves) + " ,";
     }
     System.out.println(possibleMoves);
     int choix = scanner.nextInt();
-    //isPlayValid ou itérer sur validMoves?
+    //isPlayValid ou itérer sur getValidMoves?
     while(game.isPlayValid(choix)!=true){
       System.out.println("coup non valide");
       System.out.println(possibleMoves);

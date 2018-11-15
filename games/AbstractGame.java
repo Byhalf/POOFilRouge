@@ -46,7 +46,7 @@ public abstract class AbstractGame{
   
   public abstract void makeMove(int nbr);
   
-  public abstract List<Integer> validMoves();
+  public abstract List<Integer> getValidMoves();
 
 //Pas Demandé par l'énoncé
   public abstract Boolean isPlayValid(int nbr);

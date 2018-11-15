@@ -10,7 +10,7 @@ public class Main{
     System.out.println("Joueur 1, robot(0) ou humain(1)?");
     int choix = scanner.nextInt();
     if(choix==0)
-      player1 = new RandomPlayer();
+      player1 = new MinMax();
     else{
       System.out.println("quel est le nom du joueur");
       player1 = new Human(scanner.next());
@@ -19,7 +19,7 @@ public class Main{
     System.out.println("Joueur 2, robot(0) ou humain(1)?");
     choix = scanner.nextInt();
     if(choix==0)
-      player2 = new RandomPlayer();
+      player2 = new MinMax();
     else{
       System.out.println("quel est le nom du joueur");
       player2 = new Human(scanner.next());

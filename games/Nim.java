@@ -40,7 +40,7 @@ public class Nim extends AbstractGame{
   }
 
   @Override
-  public List<Integer> validMoves(){
+  public List<Integer> getValidMoves(){
     List<Integer> possibleMoves = new ArrayList<> ();
     for(int i=1;i<=this.maxTake;i++){
       if(this.nbrMatches>=i)

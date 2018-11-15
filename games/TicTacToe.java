@@ -82,7 +82,7 @@ public class TicTacToe extends AbstractGame {
 	}
 
 	@Override
-	public List<Integer> validMoves() {
+	public List<Integer> getValidMoves() {
 		List<Integer> possibleMoves = new ArrayList<>();
 		for (int i = 1; i <= 9; i++) {
 			if (this.isPlayValid(i))
@@ -137,7 +137,7 @@ public class TicTacToe extends AbstractGame {
 	public Boolean isOver() {
 		// ADD : La partie est aussi fini si il y a un gagnant, pas que quand il ne reste
 		// plus de cases à jouer
-		if (this.validMoves().size() == 0)
+		if (this.getValidMoves().size() == 0)
 			return true;
 		else if (this.getWinner() != null)
 			return true;

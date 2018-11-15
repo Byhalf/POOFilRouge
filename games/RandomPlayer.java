@@ -8,7 +8,7 @@ public class RandomPlayer implements GamePlayer{
   private Random randomGenerator = new Random();
 
   public int chooseMove(AbstractGame game){
-    List<Integer> validMoves = game.validMoves();
+    List<Integer> validMoves = game.getValidMoves();
     int size = validMoves.size();
     return validMoves.get(this.randomGenerator.nextInt(size));
   }
