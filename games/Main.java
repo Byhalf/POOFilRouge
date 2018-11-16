@@ -17,10 +17,10 @@ public class Main{
         choixJeu=0;
       else if(args[0].equals("morpion"))
         choixJeu=1;
-      if(args[1].equals("humain"))
-        choixJoueur1=1;
-      else
+      if(args[1].equals("robot"))
         choixJoueur1=0;
+      else
+        choixJoueur1=1;
 
       if(args[2].equals("humain"))
         choixJoueur2=1;
