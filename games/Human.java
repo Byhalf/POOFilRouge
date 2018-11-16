@@ -22,6 +22,7 @@ public class Human implements GamePlayer{
       possibleMoves += Integer.toString(moves) + " ,";
     }
     System.out.println(possibleMoves);
+<<<<<<< HEAD
 
     while(true){ //la boucle sera quitté lorsque une bonne valeur sera donner
 
@@ -39,6 +40,13 @@ public class Human implements GamePlayer{
             System.out.println("coup non valide");
             System.out.println(possibleMoves);
         }
+=======
+    int choix = scanner.nextInt();
+    while(game.isPlayValid(choix)!=true){
+      System.out.println("coup non valide");
+      System.out.println(possibleMoves);
+      choix = scanner.nextInt();
+>>>>>>> brancheGareth
     }
   }
 
