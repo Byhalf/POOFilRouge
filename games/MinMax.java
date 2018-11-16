@@ -14,11 +14,13 @@ public class MinMax implements GamePlayer{
         int meilleurCoup = 0;
         int val;
 
+        int depth = 9; //@Todo modifié pour le passé en arg
+
         for(int coup: game.getValidMoves()){
             AbstractGame copyGame = game.getCopy();
             copyGame.makeMove(coup);
 
-            val = -negamax(copyGame);
+            val = -negamax(copyGame, depth-1);
 
             if(val > max){
                 max = val;
@@ -28,7 +30,7 @@ public class MinMax implements GamePlayer{
         return meilleurCoup;
     }
 
-    public int negamax(AbstractGame game){
+    public int negamax(AbstractGame game,int depth){
         int max = -999;
         int val = max;
 
@@ -37,11 +39,15 @@ public class MinMax implements GamePlayer{
             return evaluer(game);
         }
 
+        if(depth == 0){
+            return 0; //devra évalué le jeu si il est plus complexe
+        }
+
         for(int coup: game.getValidMoves()){
             AbstractGame copyGame = game.getCopy();
             copyGame.makeMove(coup);
 
-            val = Math.max(val,-negamax(copyGame));
+            val = Math.max(val,-negamax(copyGame, depth-1));
         }
         return val;
     }
