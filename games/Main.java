@@ -13,20 +13,34 @@ public class Main{
     AbstractGame game;
 
     try {
-      if(args[0].equals("nim"))
+      if(args[0].equals("nim")){
         choixJeu=0;
-      else if(args[0].equals("morpion"))
+      } else if(args[0].equals("morpion")){
         choixJeu=1;
-      if(args[1].equals("humain"))
-        choixJoueur1=1;
-      else
-        choixJoueur1=0;
+      } else {
+        System.out.println("Il faut donner nim ou morpion en premier argument");
+        System.out.println("Nim a été sélectionné par défaut");
+      }
 
-      if(args[2].equals("humain"))
+      if(args[1].equals("robot")){
+        choixJoueur1=0;
+      } else if(args[1].equals("humain")){
+        choixJoueur1=1;
+      } else {
+        System.out.println("Il faut donner humain ou robot en deuxième argument");
+        System.out.println("on sélectionne humain par défaut");
+      }
+
+      if(args[2].equals("humain")){
         choixJoueur2=1;
-      else
+      } else if(args[2].equals("robot")){
         choixJoueur2=0;
+      } else {
+        System.out.println("Il faut donner humain ou robot en troisième argument");
+        System.out.println("on sélectionne robot par défaut");
+      }
     }
+
     catch(ArrayIndexOutOfBoundsException e){
       System.out.println("Il faut donner des arguments au main jeu/typeJ1/typeJ2");
       System.out.println("Par défaut jeu=nim J1=humain J2=robot");
