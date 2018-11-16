@@ -38,7 +38,7 @@ public class Main{
       player1 = new Human(scanner.next());
     }
     if(choixJoueur2==0)
-      player2 = new RandomPlayer();
+      player2 = new MinMax();
     else{
     System.out.println("quel est le nom du joueur 2?");
     player2 = new Human(scanner.next());
