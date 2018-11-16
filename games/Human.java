@@ -21,7 +21,6 @@ public class Human implements GamePlayer{
     }
     System.out.println(possibleMoves);
     int choix = scanner.nextInt();
-    //isPlayValid ou itérer sur getValidMoves?
     while(game.isPlayValid(choix)!=true){
       System.out.println("coup non valide");
       System.out.println(possibleMoves);

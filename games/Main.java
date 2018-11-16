@@ -1,4 +1,5 @@
 package games;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
@@ -32,6 +33,7 @@ public class Main{
       System.out.println("Par défaut jeu=nim J1=humain J2=robot");
     }
 
+
     if(choixJoueur1==0)
       player1 = new MinMax();
     else{
@@ -47,9 +49,34 @@ public class Main{
 
     if(choixJeu==0){
       System.out.println("quel est le nombre d'allumettes?");
-      int initialNbMatches = scanner.nextInt();
+      boolean test = true;
+      int initialNbMatches = 10;
+      do{
+        try{
+          test = true;
+          initialNbMatches = scanner.nextInt();
+        }
+        catch(InputMismatchException e){
+          test = false;
+          System.out.println("il faut saisir un entier");
+          scanner.next();
+        }
+      }while(!test);
+
+      int nbrMax = 1;
       System.out.println("quel est le nombre max d'allumettes ramassés?");
-      int nbrMax = scanner.nextInt();
+      do{
+        try{
+          test = true;
+          nbrMax = scanner.nextInt();
+        }
+        catch(InputMismatchException e){
+          test = false;
+          System.out.println("il faut saisir un entier");
+          scanner.next();
+        }
+      }while(!test);
+
       game = new Nim(initialNbMatches,nbrMax,player1,player2);
 
     }
