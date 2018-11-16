@@ -10,6 +10,7 @@ public class Main{
     int choixJoueur1=1;
     int choixJoueur2=0;
     Scanner scanner = new Scanner(System.in);
+    AbstractGame game;
 
     try {
       if(args[0].equals("nim"))
@@ -32,7 +33,7 @@ public class Main{
     }
 
     if(choixJoueur1==0)
-      player1 = new RandomPlayer();
+      player1 = new MinMax();
     else{
       System.out.println("quel est le nom du joueur 1?");
       player1 = new Human(scanner.next());
@@ -52,8 +53,8 @@ public class Main{
       game = new Nim(initialNbMatches,nbrMax,player1,player2);
 
     }
-    else if(choixJeu==1){
-      TicTacToe game = new TicTacToe(player1,player2);
+    else {
+      game = new TicTacToe(player1,player2);
       Orchestrator orch = new Orchestrator(game);
       orch.playGame();
 
