@@ -49,13 +49,13 @@ public class Main{
 
 
     if(choixJoueur1==0)
-      player1 = new MinMax();
+      player1 = new MinMaxPlayer();
     else{
       System.out.println("quel est le nom du joueur 1?");
       player1 = new Human(scanner.next());
     }
     if(choixJoueur2==0)
-      player2 = new MinMax();
+      player2 = new MinMaxPlayer();
     else{
     System.out.println("quel est le nom du joueur 2?");
     player2 = new Human(scanner.next());
