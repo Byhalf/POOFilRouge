@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 
 public class Main{
-  public static void main(String [] args){
+  public static void main(String [] args) throws IllegalArgumentException{
     GamePlayer player1;
     GamePlayer player2;
     int choixJeu =0;
@@ -47,7 +47,6 @@ public class Main{
       System.out.println("Par défaut jeu=nim J1=humain J2=robot");
     }
 
-
     if(choixJoueur1==0)
       player1 = new MinMax();
     else{
@@ -60,7 +59,9 @@ public class Main{
     System.out.println("quel est le nom du joueur 2?");
     player2 = new Human(scanner.next());
     }
-
+    if(choixJeu !=0 && choixJeu !=1){
+      throw new IllegalArgumentException("erreur au niveau du choix de jeu");
+    }
     if(choixJeu==0){
       System.out.println("quel est le nombre d'allumettes?");
       boolean test = true;
