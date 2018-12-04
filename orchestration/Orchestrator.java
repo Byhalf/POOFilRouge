@@ -1,4 +1,5 @@
-package games;
+package orchestration;
+import games.*;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;

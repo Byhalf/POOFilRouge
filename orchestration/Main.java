@@ -1,6 +1,8 @@
-package games;
+package orchestration;
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import players.*;
+import games.*;
 
 
 public class Main{

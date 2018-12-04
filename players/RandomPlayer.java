@@ -1,4 +1,5 @@
-package games;
+package players;
+import games.*;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
