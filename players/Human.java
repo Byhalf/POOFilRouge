@@ -40,7 +40,6 @@ public class Human implements GamePlayer{
             System.out.println("coup non valide");
             System.out.println(possibleMoves);
         }
-
     }
   }
 

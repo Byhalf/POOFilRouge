@@ -2,6 +2,7 @@ package games;
 import players.*;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Nim extends AbstractGame{
   public int initialMatches;
@@ -47,6 +48,20 @@ public class Nim extends AbstractGame{
         possibleMoves.add(i);
     }
     return possibleMoves;
+  }
+
+  public int hashCode(){
+    return Objects.hash(this.getCurrPlayer(),this.nbrMatches,this.maxTake,this.initialMatches);
+  }
+
+  public boolean equals(Object o){
+    if(o == null || !(o instanceof Nim)){
+      return false;
+    } else{
+      Nim otherNim = (Nim) o;
+      return this.getCurrPlayer().equals(otherNim.getCurrPlayer()) && this.nbrMatches == otherNim.nbrMatches &&
+              this.maxTake == otherNim.maxTake;
+    }
   }
 
   @Override

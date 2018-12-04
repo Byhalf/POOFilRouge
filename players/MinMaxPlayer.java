@@ -1,12 +1,17 @@
 package players;
 import games.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
-import java.util.ArrayList;
-import java.util.List;
 
 
-public class MinMax implements GamePlayer{
+public class MinMaxPlayer implements GamePlayer{
     private Random randomGenerator = new Random();
+    private Map position;
+
+    public MinMaxPlayer(){
+        this.position = new HashMap();
+    }
 
     public int chooseMove(AbstractGame game){
         int max = -999;//-inf
@@ -28,8 +33,10 @@ public class MinMax implements GamePlayer{
     }
 
     public int negamax(AbstractGame game){
-        int max = -999;
-        int val = max;
+        if(this.position.containsKey(game)){
+            return (int) this.position.get(game);
+        }
+        int val = -999;
 
         game.changeCurrPlayer();
         if(game.isOver()){
@@ -42,6 +49,7 @@ public class MinMax implements GamePlayer{
 
             val = Math.max(val,-negamax(copyGame));
         }
+        this.position.put(game,val);
         return val;
     }
 
@@ -56,6 +64,6 @@ public class MinMax implements GamePlayer{
     }
 
     public String toString(){
-        return "RobotPlayer #"+this.randomGenerator.hashCode();
+        return "MinMaxPlayer #"+this.randomGenerator.hashCode();
     }
 }
