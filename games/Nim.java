@@ -84,6 +84,6 @@ public class Nim extends AbstractGame{
 
   @Override
   public String moveToString(Integer move){
-    return move + "allumette(s) retiré";
+    return move + " allumette(s) retiré";
   }
 }

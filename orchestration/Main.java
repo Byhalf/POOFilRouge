@@ -29,8 +29,10 @@ public class Main{
         choixJoueur1=0;
       } else if(args[1].equals("humain")){
         choixJoueur1=1;
+      } else if(args[1].equals("random")){
+        choixJoueur1=2;
       } else {
-        System.out.println("Il faut donner humain ou robot en deuxième argument");
+        System.out.println("Il faut donner humain, robot ou random en deuxième argument");
         System.out.println("on sélectionne humain par défaut");
       }
 
@@ -38,26 +40,34 @@ public class Main{
         choixJoueur2=1;
       } else if(args[2].equals("robot")){
         choixJoueur2=0;
+      } else if(args[2].equals("random")){
+        choixJoueur1=2;
       } else {
-        System.out.println("Il faut donner humain ou robot en troisième argument");
+        System.out.println("Il faut donner humain, robot ou random en troisième argument");
         System.out.println("on sélectionne robot par défaut");
       }
     }
 
     catch(ArrayIndexOutOfBoundsException e){
-      System.out.println("Il faut donner des arguments au main jeu/typeJ1/typeJ2");
+      System.out.println("Il faut donner des arguments au main: jeu typeJ1 typeJ2");
+      System.out.println("jeu peut être morpion ou nim");
+      System.out.println("joueur peut être humain,robot ou random");
       System.out.println("Par défaut jeu=nim J1=humain J2=robot");
     }
 
 
     if(choixJoueur1==0)
       player1 = new MinMax();
+    else if(choixJoueur1==2)
+      player1 = new RandomPlayer();
     else{
       System.out.println("quel est le nom du joueur 1?");
       player1 = new Human(scanner.next());
     }
     if(choixJoueur2==0)
       player2 = new MinMax();
+    else if(choixJoueur2==2)
+      player2 = new RandomPlayer();
     else{
     System.out.println("quel est le nom du joueur 2?");
     player2 = new Human(scanner.next());

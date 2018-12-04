@@ -6,7 +6,6 @@ import java.util.List;
 
 
 public class MinMax implements GamePlayer{
-    private String name;
     private Random randomGenerator = new Random();
 
     public int chooseMove(AbstractGame game){
@@ -57,6 +56,6 @@ public class MinMax implements GamePlayer{
     }
 
     public String toString(){
-        return "RandomPlayer #"+this.randomGenerator.hashCode();
+        return "RobotPlayer #"+this.randomGenerator.hashCode();
     }
 }
