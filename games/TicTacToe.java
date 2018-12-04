@@ -1,7 +1,9 @@
 package games;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class TicTacToe extends AbstractGame {
 	public GamePlayer grid[][];
@@ -43,6 +45,28 @@ public class TicTacToe extends AbstractGame {
 				return null;
 		}
 		return test;
+	}
+
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof TicTacToe)) {
+			return false;
+		} else {
+			TicTacToe otherTicTacToe = (TicTacToe) o;
+
+			Boolean gridEqual = true;
+			for (int i = 0; i < 3; i++) {
+				for (int j = 0; j < 3; j++) {
+					if (this.grid[i][j] != otherTicTacToe.grid[i][j]) {
+						gridEqual = false;
+					}
+				}
+			}
+			return this.getCurrPlayer().equals(otherTicTacToe.getCurrPlayer()) && gridEqual;
+		}
+	}
+
+	public int hashCode(){
+		return Objects.hash(this.getCurrPlayer(), Arrays.hashCode(this.grid));
 	}
 
 	@Override
