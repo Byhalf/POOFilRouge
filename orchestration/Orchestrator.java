@@ -4,13 +4,41 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+*<b>Orchestrator est une classe permettant d'orchestrer une partie quel que
+*soit le jeu choisi</b>
+*<p>
+*<ul>
+*<li>Orchestrator contient donc une instance de AbstractGame</li>
+*</ul>
+*</p>
+*@see Main
+*
+*
+*/
 public class Orchestrator{
+/**
+*l'instance de jeu qui peut être n'importe lequel des jeux qui implémentent AbstractGame
+*/
   AbstractGame game;
 
-
+/**
+*Le constructeur de l'Orchestrator
+*<p>On donne à l'Orchestrator le jeu choisi (Nim, TicTacToe, ...)</p>
+*/
   public Orchestrator(AbstractGame game){
     this.game=game;
   }
+  /**
+  *Lance le jeu choisi
+  *<p>
+  *<li>il s'arrete au moment ou la fonction isOver commune à
+  *tous les AbstractGame renvoie True </li>
+  *<li>donne le gagnant ou match nul selon le cas</li>
+  *</p>
+  *@see AbstractGame
+  *
+  */
   public void playGame() throws IllegalArgumentException{
     Scanner scanner = new Scanner(System.in);
     AbstractGame game = this.game;
