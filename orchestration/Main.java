@@ -4,7 +4,20 @@ import java.util.Scanner;
 import players.*;
 import games.*;
 
-
+/**
+*<b>La classe main</b>
+*<p>
+*Elle prend 3 arguments :
+*<ul>
+*<li>Le premier est le jeu souhaité (nim, morpion, ...)</li>
+*<li>Les 2 suivants sont les joueurs, ils peuvent etre humain, random ou robot (MinMax)</li>
+*</ul>
+*</p>
+*<p>
+*En cas de mauvais arguments on sélectionne le jeu de nim avec un humain
+*en joueur 1 et un robot en joueur 2
+*</p>
+*/
 public class Main{
   public static void main(String [] args) throws IllegalArgumentException{
     GamePlayer player1;
