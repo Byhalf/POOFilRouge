@@ -5,15 +5,29 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
+/**
+ * Classe représentant un joueur humain qui demandera
+ * donc une interraction avec un humain
+ */
 public class Human implements GamePlayer{
+    /**
+     * Le nom du joueur
+     */
   public String name;
 
+    /**
+     * Constructeur de la classe
+     * @param name
+     *       Prend un String qui correspondra au nom du joueur
+     */
   public Human(String name){
     this.name = name;
   }
 
-  @Override
+    /**
+     * Demande au joueur de choisir son coup
+     * @inheritDoc
+     */
   public int chooseMove(AbstractGame game){
     Scanner scanner = new Scanner(System.in);
     int move;
@@ -43,6 +57,11 @@ public class Human implements GamePlayer{
     }
   }
 
+    /**
+     * Override la fonction toString
+     * @return
+     *        Le nom du joueur
+     */
   public String toString(){
     return this.name;
   }
