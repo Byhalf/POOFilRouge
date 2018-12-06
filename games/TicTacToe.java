@@ -4,10 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
-
+/**
+ * Une class permettant de créé des instances de jeu TicTacToe aussi connu sous 
+ * le nom de morpion
+ */
 public class TicTacToe extends AbstractGame {
 	public GamePlayer grid[][];
-
+/**
+ * Constructeur de TicTacToe, créé une grille de jeu et utilise abstract game pour attribuer les joeurs
+ * la grille de jeu sera remplie des instances des joeurs pour savoir qui a joué où.
+ * @param player1 le joueur1 instance de GamePlayer
+ * @param player2 le joueur2 instance de GamePlayer
+ */
 	public TicTacToe(GamePlayer player1, GamePlayer player2) {
 		super(player1, player2);
 		this.grid = new GamePlayer[3][3];
@@ -27,7 +35,16 @@ public class TicTacToe extends AbstractGame {
 		return gameCopy;
 		
 	}
-	
+	/**
+	 * Methode permettant si une partie est gagné en utilisant une case et un vecteur
+	 * @param caseJeu La case à partir de laquel l'algorithme compare les valeurs des autres cases
+	 * elle doit être la case central
+	 * @param deltaRow la coordonné [0] du vecteur (la coordonnée de l'absice)
+	 * @param deltaColumn la coordonné [1] du vecteur (la coordonnée de l'ordonnée)
+	 * l'algorithme va vérifier que 2 la valeur des cases qui suivent en ligne, grace au vecteur, sont les même
+	 * que celle de la valeur de la case jeu
+	 * @return null si la parti n'est pas gagné, le joeur gagnant sinon
+	 */
 	private GamePlayer winTest(int caseJeu, int deltaRow, 
 			int deltaColumn) {
 		caseJeu--;
@@ -70,9 +87,13 @@ public class TicTacToe extends AbstractGame {
 	}
 
 	@Override
+/**
+ * Applique la méthode winTest sur les 3 case horizontal en haut et les 3 vertical sur le coté
+ * en donnant en paramêtre les vecteurs horizontaux, verticaux et enfin diagonaux.
+ * @return le joueur gagnant (instance de GamePlayer) ou si il n'y en a pas renvoie null.
+ */
 	public GamePlayer getWinner() {
 
-		// ADD : CORRECTION DES TESTS DE VICTOIRES
 		for (int i = 0; i < 3; i++) {
 			// horizontal
 			if (this.winTest(1 + i * 3, 1, 0) != null)
@@ -92,6 +113,9 @@ public class TicTacToe extends AbstractGame {
 	}
 
 	@Override
+	/**
+	 * Le coup est valide que si la case est vide, c'est ce que vérifie cet algorithme
+	 */
 	public Boolean isPlayValid(int nbr) {
 
 		nbr--;
@@ -104,7 +128,10 @@ public class TicTacToe extends AbstractGame {
 			return false;
 
 	}
-
+	/**
+	 * appel la fonction isPlayValid sur toute les cases et si un coup est possible sur cette case
+	 * l'ajoute à la liste.
+	 */
 	@Override
 	public List<Integer> getValidMoves() {
 		List<Integer> possibleMoves = new ArrayList<>();
@@ -121,7 +148,10 @@ public class TicTacToe extends AbstractGame {
 		int j = (move - i) / 3;
 		return "Case(" + Integer.toString(i) + ";" + Integer.toString(j) + ")";
 	}
-
+	/**
+	 * itére sur la grille de jeu et remplace les joeurs et les case vide à l'intérieur du tableau par des
+	 * symboles.
+	 */
 	@Override
 	public String situationToString() {
 		String situation = "";
@@ -150,6 +180,9 @@ public class TicTacToe extends AbstractGame {
 	}
 
 	@Override
+	/**
+	 * Remplie une case de la grille
+	 */
 	public void makeMove(int nbr) {
 		nbr--;
 		int x1 = nbr % 3;
@@ -158,9 +191,11 @@ public class TicTacToe extends AbstractGame {
 	}
 
 	@Override
+	/**
+	 * Vérifie si il y a un gagnant ou si la partie est finie.
+	 */
 	public Boolean isOver() {
-		// ADD : La partie est aussi fini si il y a un gagnant, pas que quand il ne reste
-		// plus de cases à jouer
+
 		if (this.getValidMoves().size() == 0)
 			return true;
 		else if (this.getWinner() != null)
@@ -171,5 +206,7 @@ public class TicTacToe extends AbstractGame {
 	public void setGrid(int x, int y, GamePlayer player) {
 		this.grid[x][y] = player;
 	}
-
+	  /**
+   * @inheritDoc
+   */
 }
