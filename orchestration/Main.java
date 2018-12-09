@@ -9,7 +9,7 @@ import games.*;
 *<p>
 *Elle prend 3 arguments :
 *<ul>
-*<li>Le premier est le jeu souhaité (nim, morpion, ...)</li>
+*<li>Le premier est le jeu souhaité (nim, morpion, puissance4)</li>
 *<li>Les 2 suivants sont les joueurs, ils peuvent etre humain, random ou robot (MinMax)</li>
 *</ul>
 *</p>
@@ -20,113 +20,100 @@ import games.*;
 */
 public class Main{
   public static void main(String [] args) throws IllegalArgumentException{
-    GamePlayer player1;
-    GamePlayer player2;
-    int choixJeu =0;
-    int choixJoueur1=1;
-    int choixJoueur2=0;
-    Scanner scanner = new Scanner(System.in);
+    if(args.length != 3){
+      throw new IllegalArgumentException("Pas le bon nombre d'agument");
+    }
+    GamePlayer player1 = null;
+    GamePlayer player2 = null;
+    GamePlayer player;
     AbstractGame game;
+    String choiceGame = null;
+    Scanner scanner = new Scanner(System.in);
 
-    try {
-      if(args[0].equals("nim")){
-        choixJeu=0;
-      } else if(args[0].equals("morpion")){
-        choixJeu=1;
-      } else {
-        System.out.println("Il faut donner nim ou morpion en premier argument");
-        System.out.println("Nim a été sélectionné par défaut");
-      }
+    Runtime runtime = Runtime.getRuntime();
+    System.out.println(runtime.totalMemory() + " " + runtime.freeMemory() + " " + runtime.maxMemory());
 
-      if(args[1].equals("robot")){
-        choixJoueur1=0;
-      } else if(args[1].equals("humain")){
-        choixJoueur1=1;
-      } else if(args[1].equals("random")){
-        choixJoueur1=2;
-      } else {
-        System.out.println("Il faut donner humain, robot ou random en deuxième argument");
-        System.out.println("on sélectionne humain par défaut");
-      }
 
-      if(args[2].equals("humain")){
-        choixJoueur2=1;
-      } else if(args[2].equals("robot")){
-        choixJoueur2=0;
-      } else if(args[2].equals("random")){
-        choixJoueur1=2;
-      } else {
-        System.out.println("Il faut donner humain, robot ou random en troisième argument");
-        System.out.println("on sélectionne robot par défaut");
-      }
-    }
-
-    catch(ArrayIndexOutOfBoundsException e){
-      System.out.println("Il faut donner des arguments au main: jeu typeJ1 typeJ2");
-      System.out.println("jeu peut être morpion ou nim");
-      System.out.println("joueur peut être humain,robot ou random");
-      System.out.println("Par défaut jeu=nim J1=humain J2=robot");
-    }
-
-    if(choixJoueur1==0)
-      player1 = new MinMaxPlayer();
-    else if(choixJoueur1==2)
-      player1 = new RandomPlayer();
-    else{
-      System.out.println("quel est le nom du joueur 1?");
-      player1 = new Human(scanner.next());
-    }
-    if(choixJoueur2==0)
-      player2 = new MinMaxPlayer();
-    else if(choixJoueur2==2)
-      player2 = new RandomPlayer();
-    else{
-    System.out.println("quel est le nom du joueur 2?");
-    player2 = new Human(scanner.next());
-    }
-    if(choixJeu !=0 && choixJeu !=1){
-      throw new IllegalArgumentException("erreur au niveau du choix de jeu");
-    }
-    if(choixJeu==0){
-      System.out.println("quel est le nombre d'allumettes?");
-      boolean test = true;
-      int initialNbMatches = 10;
-      do{
-        try{
-          test = true;
-          initialNbMatches = scanner.nextInt();
+    for(int i = 0;i < 3;i++){
+      String arg = args[i];
+      player = null;
+      if(arg.equals("nim") || arg.equals("tictactoe") || arg.equals("puissance4")){
+        choiceGame = arg;
+      } else if(arg.equals("humain")){
+        System.out.println("quel est le nom du joueur?"+i);
+        player = new Human(scanner.next());
+      } else if(arg.equals("random")){
+        player = new RandomPlayer();
+      } else if(arg.equals("robot")){
+        System.out.println("Choisissez le nombre de seconde que le robot va réflechir");
+        System.out.println("WARNING! Si le robot n'as pas eu le temps de trouver un coup dans le temps impartie," +
+                "il prendra quelque seconde de plus pour en choisir un");
+        int secondes = -1;
+        while(secondes < 0) {
+          try {
+            secondes = scanner.nextInt();
+          } catch (InputMismatchException e) {
+            scanner.next();
+          }
+          if(secondes < 0){
+            System.out.println("il faut saisir un entier positif");
+          }
         }
-        catch(InputMismatchException e){
-          test = false;
-          System.out.println("il faut saisir un entier");
+        player = new MinMaxPlayer(secondes*1000);//car se sont des millis
+
+      } else{
+        throw new IllegalArgumentException("Argument non compris");
+      }
+
+      if(player != null){
+        if(player1 == null){
+          player1 = player;
+        }else if(player2 == null){
+          player2 = player;
+        }else{
+          throw new IllegalArgumentException("Trop de joueur donné vous devez donner au moins un jeu");
+        }
+      }
+    }
+
+    if(player1 == null || player2 == null){
+      throw new IllegalArgumentException("Manque de joueurs");
+    }
+
+    if(choiceGame.equals("nim")){
+      System.out.println("Choisissez le nombre d'allumette");
+      int nbMatches = -1;
+      while(nbMatches < 0) {
+        try {
+          nbMatches = scanner.nextInt();
+        } catch (InputMismatchException e) {
           scanner.next();
         }
-      }while(!test);
-
-      int nbrMax = 1;
-      System.out.println("quel est le nombre max d'allumettes ramassés?");
-      do{
-        try{
-          test = true;
-          nbrMax = scanner.nextInt();
+        if (nbMatches < 0) {
+          System.out.println("Il faut un entier positif");
         }
-        catch(InputMismatchException e){
-          test = false;
-          System.out.println("il faut saisir un entier");
+      }
+
+      System.out.println("Choisissez le nombre d'allumette pris maximun");
+      int matchesTake = -1;
+      while(matchesTake < 0) {
+        try {
+          matchesTake = scanner.nextInt();
+        } catch (InputMismatchException e) {
           scanner.next();
         }
-      }while(!test);
+        if (matchesTake < 0) {
+          System.out.println("Il faut un entier positif");
+        }
+      }
 
-      game = new Nim(initialNbMatches,nbrMax,player1,player2);
-
-    }
-    else {
+      game = new Nim(nbMatches,matchesTake,player1,player2);
+    } else if(choiceGame.equals("morpion")){
       game = new TicTacToe(player1,player2);
-      Orchestrator orch = new Orchestrator(game);
-      orch.playGame();
-
-
+    }else{
+      game = new ConnectFour(player1,player2);
     }
+
     Orchestrator orch = new Orchestrator(game);
     orch.playGame();
     scanner.close();
